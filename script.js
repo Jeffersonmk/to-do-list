@@ -15,16 +15,26 @@ $(document).ready(function(){
         }
     });
 
-
-    $(document).on('click', '.button-task-unchecked', function(){
-        $(this).css({
+    function estiloBotao(elemento) {
+        $(elemento).css({
             'background-color': 'green',
             'color': 'white',
             'width': '40px',
-            'height': '40px',
+            'height': '40px',    
         });
-        $(this).text('✓'); // Define o texto do botão como 'Concluído' ao clicar nele
+        $(elemento).text('✓');// Define o texto do botão como 'Concluído' ao clicar nele
+    }
+
+    $(document).on('click', '.button-task-unchecked', function(){
+        estiloBotao(this);
         // Encontra o pai <li> e aplica o estilo de line-through
         $(this).parent('li').css('text-decoration', 'line-through');
     });
+
+    $('#tasks').on('click', 'li', function(){
+        estiloBotao($(this).find('.button-task-unchecked'));
+        $(this).css('text-decoration', 'line-through');
+    }); 
+    
+    $('#tasks').css('cursor', 'pointer');
 });
